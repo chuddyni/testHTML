@@ -53,27 +53,46 @@ public class Main {
 
         PrintWriter out = new PrintWriter("69name.txt");
 
-        for (int i = 2323; i < 2400; i++) {
+        for (int i = 1; i < 7000; i++) {
             try {
 
                 //connect
-
-                System.out.printf("\n");
                 Document doc = Jsoup.connect("https://backoffice.miceolution.eu/en/user/" + i).get();
 
+                //get name
 
-                //get element by class USERNAME
+                Element name = doc.getElementsByClass("views-field views-field-field-afl-first-name views-column-odd views-column-first views-column-last").last();
+                System.out.print(name.text() + " ");
+
+                //get surname
+
+                Element surname = doc.getElementsByClass("views-field views-field-field-afl-surname views-column-odd views-column-first views-column-last").last();
+                System.out.print(surname.text() + " ");
+
+                //get username
 
                 Element username = doc.getElementsByClass("username active").last();
-                Elements username_ = username.getElementsByTag("a");
+                System.out.print(username.text() + " ");
 
-                System.out.println(username.text());
-                
+                //get e-mail
 
-//                String strona_dane = doc.text();
-//                System.out.println(strona_dane);
-//
-//                out.println(strona_dane + "\n");
+                Element email = doc.getElementsByClass("views-field views-field-mail views-column-odd views-column-first views-column-last").last();
+                System.out.print(email.text() + " ");
+
+                //get phone number
+
+                Element phone_nr = doc.getElementsByClass("views-field views-field-field-mobile-number views-column-odd views-column-first views-column-last").last();
+                System.out.print(phone_nr.text() + " ");
+
+                //get sponsor
+
+                Element sponsor = doc.getElementsByClass("views-field views-field-field-afl-sponsor views-column-odd views-column-first views-column-last").last();
+                System.out.print(sponsor.text() + " ");
+
+                if(name != null)
+                {
+                    System.out.printf("\n");
+                }
 
             } catch (NullPointerException | IOException ignored) {
             }
