@@ -53,7 +53,7 @@ public class Main {
 
         PrintWriter out = new PrintWriter("69name.txt");
 
-        for (int i = 2323; i < 2330; i++) {
+        for (int i = 2323; i < 2400; i++) {
             try {
 
                 //connect
@@ -62,29 +62,20 @@ public class Main {
                 Document doc = Jsoup.connect("https://backoffice.miceolution.eu/en/user/" + i).get();
 
 
+                //get element by class USERNAME
 
-                Element content = doc.getElementsByClass("username active").last();
-                Elements links = content.getElementsByTag("a");
+                Element username = doc.getElementsByClass("username active").last();
+                Elements username_ = username.getElementsByTag("a");
 
-                for (Element link : links) {
-                    String linkHref = link.attr("href");
-
-                  //  System.out.print(linkHref);
-
-                    String linkText = link.text();
-
-                    System.out.println(linkText);
-                }
-
+                System.out.println(username.text());
+                
 
 //                String strona_dane = doc.text();
 //                System.out.println(strona_dane);
 //
 //                out.println(strona_dane + "\n");
 
-            } catch (NullPointerException e) {
-            } catch (HttpStatusException e) {
-            } catch (IOException e) {
+            } catch (NullPointerException | IOException ignored) {
             }
 
         }
